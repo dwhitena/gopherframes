@@ -19,6 +19,24 @@ type DataFrame struct {
 	varMap map[string]int
 }
 
+// DataGrid implementations represent data addressable by rows and columns.
+type DataGrid interface {
+	// Retrieves a given Attribute's specification
+	GetAttribute(Attribute) (AttributeSpec, error)
+	// Retrieves details of every Attribute
+	AllAttributes() []Attribute
+	// Marks an Attribute as a class Attribute
+	AddClassAttribute(Attribute) error
+	// Unmarks an Attribute as a class Attribute
+	RemoveClassAttribute(Attribute) error
+	// Returns details of all class Attributes
+	AllClassAttributes() []Attribute
+	// Gets the bytes at a given position or nil
+	Get(AttributeSpec, int) []byte
+	// Convenience function for iteration.
+	MapOverRows([]AttributeSpec, func([][]byte, int) (bool, error)) error
+}
+
 // similar to what is used in Go Learn 
 
 // DenseInstances stores each Attribute value explicitly
