@@ -1,5 +1,7 @@
 package main
 
+import "sync"
+
 // similar to what is from package dataframe
 
 // DataFrame - is a table where columns are variables and rows are measurements.
@@ -37,7 +39,8 @@ type DataGrid interface {
 	MapOverRows([]AttributeSpec, func([][]byte, int) (bool, error)) error
 }
 
-// similar to what is used in Go Learn 
+// similar to what is used in Go Learn
+// see gophernotes example notebook for more
 
 // DenseInstances stores each Attribute value explicitly
 // in a large grid.
